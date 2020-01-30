@@ -89,18 +89,20 @@ function App() {
         <ClickAwayListener  onClickAway={() => [setOpen(false), setSecondOpen(false)]}>
         <Paper>
 
-          <Grid item alignItems="flex-start" direction="column" className={classes.firstMenuContainer}>
-          <Button className="hello" className={classes.menuButtons} onClick={() => console.log("hello")}>Users</Button>
-          <Button className="hello" className={classes.menuButtons} onClick={() => console.log('right')}>User Groups</Button>
-          <Button className="hello" className={classes.menuButtons} onClick={() => console.log('right')}>User Privileges</Button>
-          <Button className="hello" className={classes.menuButtons} onClick={() => console.log('right')}>LIcense Allocation</Button>
-        
-          </Grid>
+        <Grid item container xs={6} className={classes.firstMenuContainer} alignItems="flex-start" direction="column">
+                {/* <Grid item> */}
+                  <Button ref={secondAnchorEl} className={classes.menuButtons} onClick={console.log('right')}>Users</Button>
+                  <Button ref={secondAnchorEl} className={classes.menuButtons} onClick={console.log('right')}>User Groups</Button>
+                  <Button ref={secondAnchorEl} className={classes.menuButtons} onClick={console.log('right')}>User Privileges</Button>
+                  <Button ref={secondAnchorEl} className={classes.menuButtons} onClick={console.log('right')}>License Allocation</Button>
+                  
+                {/* </Grid> */}
+              </Grid>
         </Paper>
         </ClickAwayListener>
       </Popper>
       
-        <Grid container justify="center">
+      <Grid container justify="center">
         <Grid item>
           <Button onClick={handleClick('bottom')}>bottom</Button>
         </Grid>
