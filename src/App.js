@@ -8,6 +8,7 @@ import Grid from '@material-ui/core/Grid';
 import Button from '@material-ui/core/Button';
 import Fade from '@material-ui/core/Fade';
 import Paper from '@material-ui/core/Paper';
+import ClickAwayListener from '@material-ui/core/ClickAwayListener';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -38,7 +39,7 @@ function App() {
       setPlacement(newPlacement);
     } else {
       setSecondAnchorEl(event.currentTarget)
-      setSecondOpen(true)
+      setSecondOpen(prev => placement !== newPlacement || !prev)
       setSecondPlacement(newPlacement)
     }
       
@@ -57,6 +58,7 @@ function App() {
         transition>
         {({ TransitionProps }) => (
           <Fade {...TransitionProps} timeout={350}>
+            <ClickAwayListener  onClickAway={() => setOpen(false)}>
             <Paper>
               {/* <Typography className={classes.typography}>The content of the Popper.</Typography> */}
               <Grid item container xs={6} alignItems="flex-end" direction="column">
@@ -67,6 +69,7 @@ function App() {
             
               </Grid>
             </Paper>
+            </ClickAwayListener>
           </Fade>
         )}
       </Popper>
@@ -74,24 +77,16 @@ function App() {
       open={secondOpen} 
       anchorEl={secondAnchorEl} 
       placement={secondPlacement} >
+        <ClickAwayListener  onClickAway={() => setSecondOpen(false)}>
         <Paper>
         {/* <Typography className={classes.typography}>The content of the Popper.</Typography> */}
           <Grid item>
-          <Button className="hello" onClick={() => alert('button Clicked')}>right</Button>
+          <Button className="hello" onClick={() => console.log("hello")}>right</Button>
           </Grid>
         </Paper>
+        </ClickAwayListener>
       </Popper>
-      {/* <Grid item container xs={6} alignItems="flex-end" direction="column">
-          <Grid item>
-            <Button onClick={handleClick('right-start')}>right-start</Button>
-          </Grid>
-          <Grid item>
-            <Button onClick={handleClick('right')}>right</Button>
-          </Grid>
-          <Grid item>
-            <Button onClick={handleClick('right-end')}>right-end</Button>
-          </Grid>
-        </Grid> */}
+      
         <Grid container justify="center">
         <Grid item>
           <Button onClick={handleClick('bottom')}>bottom</Button>
