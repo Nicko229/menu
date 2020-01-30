@@ -9,6 +9,7 @@ import Button from '@material-ui/core/Button';
 import Fade from '@material-ui/core/Fade';
 import Paper from '@material-ui/core/Paper';
 import ClickAwayListener from '@material-ui/core/ClickAwayListener';
+import { KeyboardArrowRight } from "@material-ui/icons";
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -17,6 +18,13 @@ const useStyles = makeStyles(theme => ({
   typography: {
     padding: theme.spacing(2),
   },
+  menuButtons: {
+    textTransform: 'none', 
+    width: '100%',
+  },
+  firstMenuContainer: {
+    maxWidth: '100%'
+  }
 }));
 
 function App() {
@@ -30,19 +38,15 @@ function App() {
   const [secondPlacement, setSecondPlacement] = React.useState('')
   const classes = useStyles();
 
-  console.log("secondOpen", secondOpen)
-  console.log("open", open)
-  console.log("placement", placement)
-
   const handleClick = newPlacement => event => {
     if(!open) {
       setAnchorEl(event.currentTarget);
       setOpen(true);
       setPlacement(newPlacement);
     } else {
-      setSecondAnchorEl(event.currentTarget)
-      setSecondOpen(true)
-      setSecondPlacement(newPlacement)
+      setSecondAnchorEl(event.currentTarget);
+      setSecondOpen(true);
+      setSecondPlacement(newPlacement);
     }    
   };
 
@@ -53,19 +57,25 @@ function App() {
       <Popper 
         open={open} 
         anchorEl={anchorEl} 
-        placement={'bottom'} 
+        placement={placement} 
         transition>
         {({ TransitionProps }) => (
           <Fade {...TransitionProps} timeout={350}>
             <ClickAwayListener  onClickAway={() => setOpen(false)}>
             <Paper>
-              {/* <Typography className={classes.typography}>The content of the Popper.</Typography> */}
-              <Grid item container xs={6} alignItems="flex-end" direction="column">
-             
-                <Grid item>
-                  <Button ref={secondAnchorEl} className="hello" onClick={handleClick('right')}>right</Button>
-                </Grid>
-            
+              <Grid item container xs={6} className={classes.firstMenuContainer} alignItems="flex-start" direction="column">
+                {/* <Grid item> */}
+                
+                  <Button ref={secondAnchorEl} className={classes.menuButtons} onClick={handleClick('right-start')}>
+                    User Management
+                    <KeyboardArrowRight color="inherit" fontSize="small" className={classes.arrowDown} />
+                  </Button>
+                  <Button ref={secondAnchorEl} className={classes.menuButtons} onClick={console.log('right')}>Data Sources</Button>
+                  <Button ref={secondAnchorEl} className={classes.menuButtons} onClick={console.log('right')}>Delivery Channels</Button>
+                  <Button ref={secondAnchorEl} className={classes.menuButtons} onClick={console.log('right')}>License Management</Button>
+                  <Button ref={secondAnchorEl} className={classes.menuButtons} onClick={console.log('right')}>Ping Settings</Button>
+                  
+                {/* </Grid> */}
               </Grid>
             </Paper>
             </ClickAwayListener>
@@ -78,9 +88,13 @@ function App() {
       placement={secondPlacement} >
         <ClickAwayListener  onClickAway={() => [setOpen(false), setSecondOpen(false)]}>
         <Paper>
-        {/* <Typography className={classes.typography}>The content of the Popper.</Typography> */}
-          <Grid item>
-          <Button className="hello" onClick={() => handleClick('right')}>right</Button>
+
+          <Grid item alignItems="flex-start" direction="column" className={classes.firstMenuContainer}>
+          <Button className="hello" className={classes.menuButtons} onClick={() => console.log("hello")}>Users</Button>
+          <Button className="hello" className={classes.menuButtons} onClick={() => console.log('right')}>User Groups</Button>
+          <Button className="hello" className={classes.menuButtons} onClick={() => console.log('right')}>User Privileges</Button>
+          <Button className="hello" className={classes.menuButtons} onClick={() => console.log('right')}>LIcense Allocation</Button>
+        
           </Grid>
         </Paper>
         </ClickAwayListener>
