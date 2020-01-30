@@ -30,22 +30,21 @@ function App() {
   const [secondPlacement, setSecondPlacement] = React.useState('')
   const classes = useStyles();
 
-  console.log("secanchorEl", secondAnchorEl)
+  console.log("secondOpen", secondOpen)
+  console.log("open", open)
+  console.log("placement", placement)
 
   const handleClick = newPlacement => event => {
-    if(placement === '') {
+    if(!open) {
       setAnchorEl(event.currentTarget);
-      setOpen(prev => placement !== newPlacement || !prev);
+      setOpen(true);
       setPlacement(newPlacement);
     } else {
       setSecondAnchorEl(event.currentTarget)
-      setSecondOpen(prev => placement !== newPlacement || !prev)
+      setSecondOpen(true)
       setSecondPlacement(newPlacement)
-    }
-      
+    }    
   };
-
-  // make separate popper??
 
   return (
     <div className="App">
@@ -77,11 +76,11 @@ function App() {
       open={secondOpen} 
       anchorEl={secondAnchorEl} 
       placement={secondPlacement} >
-        <ClickAwayListener  onClickAway={() => setSecondOpen(false)}>
+        <ClickAwayListener  onClickAway={() => [setOpen(false), setSecondOpen(false)]}>
         <Paper>
         {/* <Typography className={classes.typography}>The content of the Popper.</Typography> */}
           <Grid item>
-          <Button className="hello" onClick={() => console.log("hello")}>right</Button>
+          <Button className="hello" onClick={() => handleClick('right')}>right</Button>
           </Grid>
         </Paper>
         </ClickAwayListener>
