@@ -12,12 +12,12 @@ import ClickAwayListener from '@material-ui/core/ClickAwayListener';
 import { KeyboardArrowRight } from "@material-ui/icons";
 
 const useStyles = makeStyles(theme => ({
-  root: {
-    width: 500,
-  },
-  typography: {
-    padding: theme.spacing(2),
-  },
+  // root: {
+  //   width: 500,
+  // },
+  // typography: {
+  //   padding: theme.spacing(2),
+  // },
   menuButtons: {
     textTransform: 'none', 
     width: '100%',
@@ -46,7 +46,7 @@ function App() {
     } else {
       setSecondAnchorEl(event.currentTarget);
       setSecondOpen(true);
-      setSecondPlacement(newPlacement);
+      setSecondPlacement('right-start');
     }    
   };
 
